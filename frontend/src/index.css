@@ -1,0 +1,180 @@
+@import 'tailwindcss';
+
+/*
+ * THREE-TIER DESIGN TOKEN SYSTEM
+ * 1. Primitive tokens — raw scales (neutral + brand ramps, status hues, fonts).
+ * 2. Semantic tokens   — meaning-based vars consumed by components (bg, fg, …),
+ *                        defined for light and overridden for dark.
+ * 3. Theme mapping      — `@theme inline` binds Tailwind utilities to the semantic
+ *                        vars, so utilities follow the active theme at runtime.
+ * No component references a raw hex or pixel value — only these tokens/utilities.
+ */
+
+:root {
+  /* ── 1. Primitive: neutral (slate) ── */
+  --neutral-0: #ffffff;
+  --neutral-50: #f8fafc;
+  --neutral-100: #f1f5f9;
+  --neutral-200: #e2e8f0;
+  --neutral-300: #cbd5e1;
+  --neutral-400: #94a3b8;
+  --neutral-500: #64748b;
+  --neutral-600: #475569;
+  --neutral-700: #334155;
+  --neutral-800: #1e293b;
+  --neutral-900: #0f172a;
+  --neutral-950: #020617;
+
+  /* ── 1. Primitive: brand (indigo) ── */
+  --brand-50: #eef2ff;
+  --brand-100: #e0e7ff;
+  --brand-200: #c7d2fe;
+  --brand-300: #a5b4fc;
+  --brand-400: #818cf8;
+  --brand-500: #6366f1;
+  --brand-600: #4f46e5;
+  --brand-700: #4338ca;
+  --brand-800: #3730a3;
+  --brand-900: #312e81;
+
+  /* ── 1. Primitive: status ── */
+  --green-500: #22c55e;
+  --green-600: #16a34a;
+  --amber-500: #f59e0b;
+  --amber-600: #d97706;
+  --red-500: #ef4444;
+  --red-600: #dc2626;
+  --blue-500: #3b82f6;
+  --blue-600: #2563eb;
+
+  /* ── 1. Primitive: typography ── */
+  --font-sans-stack: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-display-stack: 'Lexend Variable', 'Inter Variable', ui-sans-serif, sans-serif;
+  --font-mono-stack: ui-monospace, 'SFMono-Regular', 'Menlo', monospace;
+
+  /* ── 2. Semantic: light theme ── */
+  --background: var(--neutral-50);
+  --surface: var(--neutral-0);
+  --surface-muted: var(--neutral-100);
+  --foreground: var(--neutral-900);
+  --muted: var(--neutral-100);
+  --muted-foreground: var(--neutral-500);
+  --border: var(--neutral-200);
+  --input: var(--neutral-200);
+  --primary: var(--brand-600);
+  --primary-foreground: var(--neutral-0);
+  --secondary: var(--neutral-100);
+  --secondary-foreground: var(--neutral-900);
+  --accent: var(--brand-50);
+  --accent-foreground: var(--brand-700);
+  --success: var(--green-600);
+  --success-foreground: var(--neutral-0);
+  --warning: var(--amber-500);
+  --warning-foreground: var(--neutral-950);
+  --danger: var(--red-600);
+  --danger-foreground: var(--neutral-0);
+  --info: var(--blue-600);
+  --info-foreground: var(--neutral-0);
+  --ring: var(--brand-500);
+
+  --radius: 0.625rem;
+}
+
+[data-theme='dark'] {
+  /* ── 2. Semantic: dark theme (override only) ── */
+  --background: var(--neutral-950);
+  --surface: var(--neutral-900);
+  --surface-muted: var(--neutral-800);
+  --foreground: var(--neutral-50);
+  --muted: var(--neutral-800);
+  --muted-foreground: var(--neutral-400);
+  --border: var(--neutral-800);
+  --input: var(--neutral-700);
+  --primary: var(--brand-500);
+  --primary-foreground: var(--neutral-950);
+  --secondary: var(--neutral-800);
+  --secondary-foreground: var(--neutral-50);
+  --accent: var(--neutral-800);
+  --accent-foreground: var(--brand-300);
+  --success: var(--green-500);
+  --warning: var(--amber-500);
+  --danger: var(--red-500);
+  --info: var(--blue-500);
+  --ring: var(--brand-400);
+}
+
+/* ── 3. Theme mapping: bind Tailwind utilities to the semantic tokens ── */
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-danger: var(--danger);
+  --color-danger-foreground: var(--danger-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-ring: var(--ring);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --font-sans: var(--font-sans-stack);
+  --font-display: var(--font-display-stack);
+  --font-mono: var(--font-mono-stack);
+}
+
+@layer base {
+  *,
+  ::after,
+  ::before {
+    border-color: var(--border);
+  }
+  html {
+    color-scheme: light;
+  }
+  html[data-theme='dark'] {
+    color-scheme: dark;
+  }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans-stack);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  /* Visible, token-based focus ring for keyboard users. */
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+}
+
+/* Respect users who prefer reduced motion: neutralize animation + transitions. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
