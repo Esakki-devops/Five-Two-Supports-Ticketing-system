@@ -20,9 +20,12 @@ jobs:
           key: ${{ secrets.OCI_SSH_KEY }}
 
           script: |
-            cd  /opt/fivetwo
-            git pull origin main
+              cd /opt/fivetwo
 
-            docker compose down
+              git config --global --add safe.directory /opt/fivetwo
 
-            docker compose up -d --build
+              git pull origin main
+
+              docker compose down
+
+              docker compose up -d --build
