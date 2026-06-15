@@ -16,7 +16,7 @@ export function AuthLayout() {
         </div>
       </main>
       <footer className="px-6 py-4 text-center text-xs text-muted-foreground">
-        © {new Date().getFullYear()} Five Two Supports ·  Ticketing . 022
+        © {new Date().getFullYear()} Five Two Supports ·  Ticketing
       </footer>
     </div>
   );
