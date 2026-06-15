@@ -24,8 +24,10 @@ jobs:
 
               git config --global --add safe.directory /opt/fivetwo
 
-              git pull origin main
+              git fetch origin
 
+              git reset --hard origin/main
+              
               docker compose down
 
               docker compose up -d --build
