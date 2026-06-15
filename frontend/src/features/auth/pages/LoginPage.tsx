@@ -48,7 +48,7 @@ export default function LoginPage() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Welcome back</CardTitle>
+        <CardTitle>Wellcome back</CardTitle>
         <CardDescription>Sign in to the Five Two Supports ticketing platform.</CardDescription>
       </CardHeader>
       <CardContent>
